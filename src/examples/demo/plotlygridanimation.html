@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plotly Grid</title>
+    <script src="../../../external/d3.v4.min.js"></script>
+    <script src="../../../external/jquery-3.2.1.min.js"></script>
+    <script src="../../../external/plotly-1.31.0.min.js"></script>
+    <script src="../../../external/three-r87.min.js"></script>
+    <script src="../../main/utils/dryjs-logger.js"></script>
+    <script src="../../main/utils/dryjs-url-utils.js"></script>
+    <script src="../../main/grid/dryjs-grid.js"></script>
+    <script src="../../main/grid/dryjs-plotly-gridhelper.js"></script>
+    <script>
+        if(DRYJS_URL_UTILS.getParameterByNameFromUrl('debug') === "Y")
+            DRYJS_LOGGER.setDebugMode(true);
+
+        const media_dir = "../../../media/files";
+        let files = ['grid.csv', 'static.csv'];
+        let prefix = DRYJS_URL_UTILS.getParameterByNameFromUrl('prefix', '');
+        files = files.map(f => media_dir + '/' + prefix + f);
+
+        let gridControl = null;
+        $(document).ready(function() {
+            gridControl = DRYJS_PLOTLYGRIDHELPER.drawGrid(
+                "container",
+                files[0],
+                files[1],
+                false,
+                {
+                    msg_divid: "containermsg",
+                }
+            );
+        });
+
+        function setColor(file) {
+            gridControl.setColor(media_dir + '/' + prefix + file, file.startsWith('dynamic'));
+        }
+    </script>
+</head>
+
+<body>
+<div id="containermsg"></div>
+<div>
+    <form name="colorform">
+        <select name="colorselect" OnChange="setColor(colorform.colorselect.options[selectedIndex].value)">
+            <option value="static.csv">static</option>
+            <option value="static1.csv">static1</option>
+            <option value="dynamic.csv">dynamic</option>
+            <option value="dynamic1.csv">dynamic1</option>
+        </select>
+    </form>
+</div>
+<div id="container"></div>
+</body>
+
+</html>

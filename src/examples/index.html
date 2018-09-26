@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style>
+			body {
+				font-family: monospace;
+				background-color: #F5F5F5;
+				margin: 0;
+				overflow: hidden;
+			}
+			#container {
+				height: 492px;
+				width: 876px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+		</div>
+		<script>
+				elem = document.createElement("div");
+				elem.innerHTML =
+					['<br><form name="run"><label>&nbsp;Select script:</label>',
+							'<select name="exercises"',
+							' OnChange="location.href=run.exercises.options[selectedIndex].value">',
+							'	 <option selected>Select exercise',
+                        	'	 <option value="demo/plotlytest.html">Plotly Test',
+                        	'	 <option value="demo/plotlygridanimation.html?prefix=spe1/">Plotly Grid(spe1)',
+                        	'	 <option value="demo/plotlygridanimation.html">Plotly Grid',
+	                        '	 <option value="demo/webglgridanimation.html">WebGL Grid',
+	                        '	 <option value="demo/webglgridanimation.html?prefix=spe1/">WebGL Grid(spe1)',
+							'</select>'].join('\n');
+					elem.innerHTML = elem.innerHTML + "</form><br/>";
+					document.body.insertBefore(elem,document.body.childNodes[0])
+		</script>
+	</body>
+</html>
